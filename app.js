@@ -24,27 +24,33 @@ function playRound(playerSelection, computerSelection) {
             return `Draw! ${playerSelection} vs ${computerSelection}`;
         }
         else if (playerSelection === "rock" && computerSelection === "scissors") {
+            playerScore++;
             return `You Win! ${playerSelection} vs ${computerSelection}`;
         }
         else if (playerSelection === "rock" && computerSelection === "paper") {
+            computerScore++;
             return `You Lose! ${playerSelection} vs ${computerSelection}`;
         }
         else if (playerSelection === "paper" && computerSelection === "paper") {
             return `Draw! ${playerSelection} vs ${computerSelection}`;
         }
         else if (playerSelection === "paper" && computerSelection === "rock") {
+            playerScore++;
             return `You Win! ${playerSelection} vs ${computerSelection}`;
         }
         else if (playerSelection === "paper" && computerSelection === "scissors") {
+            computerScore++;
             return `You Lose! ${playerSelection} vs ${computerSelection}`;
         }
         else if (playerSelection === "scissors" && computerSelection === "scissors") {
             return `Draw! ${playerSelection} vs ${computerSelection}`;
         }
         else if (playerSelection === "scissors" && computerSelection === "paper") {
+            playerScore++;
             return `You Win! ${playerSelection} vs ${computerSelection}`;
         }
         else if (playerSelection === "scissors" && computerSelection === "rock") {
+            computerScore++;
             return `You Lose! ${playerSelection} vs ${computerSelection}`;
         }
     } else {
@@ -52,3 +58,24 @@ function playRound(playerSelection, computerSelection) {
         return false;
     }
 }
+
+// Main game loop
+function game() {
+    for (let i = 0; i < 5; i++) {
+        const playerSelection = prompt("rock, paper or scissors?");
+        console.log(playRound(playerSelection, computerPlay()));
+    }
+
+    if (playerScore > computerScore) {
+        console.log(`You won the match! your score: ${playerScore} vs ${computerScore}`);
+    } else if (playerScore < computerScore) {
+        console.log(`You lost the match! your score: ${playerScore} vs ${computerScore}`);
+    } else {
+        console.log(`Its a draw! your score: ${playerScore} vs ${computerScore}`);
+    }
+}
+
+let computerScore = 0;
+let playerScore = 0;
+
+game();
