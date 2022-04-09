@@ -19,7 +19,7 @@ function random(num) {
 function playRound(playerSelection, computerSelection) {
     playerSelection = playerSelection.toLowerCase();
     if (playerSelection === "rock" || playerSelection === "paper" || playerSelection === "scissors") {
-
+        console.log(playerSelection, computerSelection)
         if (playerSelection === "rock" && computerSelection === "rock") {
             return `Draw! ${playerSelection} vs ${computerSelection}`;
         }
@@ -56,6 +56,7 @@ function playRound(playerSelection, computerSelection) {
     } else {
         console.error("Invald Input. (rock, paper or scissors only)");
         return false;
+        invalidInput = true;
     }
 }
 
@@ -66,16 +67,17 @@ function game() {
 
     // Play the game for 5 rounds
     for (let i = 0; i < numberOfRounds; i++) {
+        invalidInput = false;
         const playerSelection = prompt("rock, paper or scissors?");
 
         // If the player gave an invalid input, increase number of rounds by 1
         // So that it will always be 5 (valid) rounds
-        if (playRound(playerSelection, computerPlay()) === false) {
+        const result = playRound(playerSelection, computerPlay());
+        if (result === false) {
             numberOfRounds++;
         } else {
-            console.log(playRound(playerSelection, computerPlay()));
+            console.log(result);
         }
-
     }
 
     // Print match winner / loser or print draw if its a draw
@@ -90,5 +92,6 @@ function game() {
 
 let computerScore = 0;
 let playerScore = 0;
+let invalidInput = false;
 
 game();
