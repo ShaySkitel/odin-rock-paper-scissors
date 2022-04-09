@@ -61,11 +61,24 @@ function playRound(playerSelection, computerSelection) {
 
 // Main game loop
 function game() {
-    for (let i = 0; i < 5; i++) {
+
+    let numberOfRounds = 5;
+
+    // Play the game for 5 rounds
+    for (let i = 0; i < numberOfRounds; i++) {
         const playerSelection = prompt("rock, paper or scissors?");
-        console.log(playRound(playerSelection, computerPlay()));
+
+        // If the player gave an invalid input, increase number of rounds by 1
+        // So that it will always be 5 (valid) rounds
+        if (playRound(playerSelection, computerPlay()) === false) {
+            numberOfRounds++;
+        } else {
+            console.log(playRound(playerSelection, computerPlay()));
+        }
+
     }
 
+    // Print match winner / loser or print draw if its a draw
     if (playerScore > computerScore) {
         console.log(`You won the match! your score: ${playerScore} vs ${computerScore}`);
     } else if (playerScore < computerScore) {
