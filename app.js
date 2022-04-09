@@ -56,7 +56,6 @@ function playRound(playerSelection, computerSelection) {
     } else {
         console.error("Invald Input. (rock, paper or scissors only)");
         return false;
-        invalidInput = true;
     }
 }
 
