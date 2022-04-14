@@ -31,9 +31,9 @@ function printWinner(...score) {
     }
     const span = document.createElement("span");
     if (score[0] > score[1]) {
-        span.textContent = `YOU WIN THE MATCH ${score[0]} vs ${score[1]}`;
+        span.textContent = `YOU WIN THE MATCH`;
     } else {
-        span.textContent = `YOU LOST! ${score[0]} vs ${score[1]}`;
+        span.textContent = `YOU LOST!`;
     }
     results.appendChild(span);
 }
