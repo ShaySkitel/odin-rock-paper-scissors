@@ -15,6 +15,7 @@ function random(num) {
     return Math.floor(Math.random() * num);
 }
 
+// Print round results
 function displayResults(result) {
     if (results.firstChild) {
         results.removeChild(results.firstChild);
@@ -25,6 +26,7 @@ function displayResults(result) {
     results.appendChild(span);
 }
 
+// Print match winner
 function printWinner(...score) {
     if (results.firstChild) {
         results.removeChild(results.firstChild);
@@ -38,9 +40,11 @@ function printWinner(...score) {
     results.appendChild(span);
 }
 
+
 // Play one round and return the winning or losing text
 function playRound(playerSelection, computerSelection) {
 
+    // If the game is NOT over, check for round winner by comparing player selection and computer selection.
     if (!gameOver) {
         playerSelection = playerSelection.toLowerCase();
         if (playerSelection === "rock" || playerSelection === "paper" || playerSelection === "scissors") {
@@ -86,6 +90,19 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
+// Game function to execute when the player clicks on one of the 3 selection buttons
+function game(e) {
+    if (!gameOver) {
+        displayResults(playRound(e.target.attributes[0].nodeValue, computerPlay()));
+    }
+    playerScoreText.textContent = playerScore;
+    computerScoreText.textContent = computerScore;
+    if (playerScore >= 5 || computerScore >= 5) {
+        gameOver = true;
+        printWinner(playerScore, computerScore);
+    }
+}
+
 let computerScore = 0;
 let playerScore = 0;
 let invalidInput = false;
@@ -95,16 +112,7 @@ const results = document.querySelector("#result");
 const playerScoreText = document.querySelector("#pscore");
 const computerScoreText = document.querySelector("#cscore");
 
+// Add a click event listener to all buttons and execute game function once clicked
 for (const btn of btns) {
-    btn.addEventListener("click", e => {
-        if (!gameOver) {
-            displayResults(playRound(e.target.attributes[0].nodeValue, computerPlay()));
-        }
-        playerScoreText.textContent = playerScore;
-        computerScoreText.textContent = computerScore;
-        if (playerScore >= 5 || computerScore >= 5) {
-            gameOver = true;
-            printWinner(playerScore, computerScore);
-        }
-    });
+    btn.addEventListener("click", game);
 }
